@@ -8,4 +8,4 @@ Pastas necessárias
 Dentro da pasta **backend** inicie o projeto 
 `npm init`
 Instale as ferramentas necessárias
-npm i express nodemon cors axios --save
+`npm i express nodemon cors axios --save`
