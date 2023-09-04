@@ -1,35 +1,45 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+// Importação de bibliotecas e componentes
+import './index.css';
+import logo from '/logo.svg'
+import React from 'react';
+import { Layout} from 'antd';
+import { Loop } from './components/Loop';
 
-function App() {
-  const [count, setCount] = useState(0)
 
+const { Content, Footer, Header } = Layout;
+
+// Componente App
+const App: React.FC = () => {
+  /* const [searchTerm, setSearchTerm] = 'useState'<string>(''); */
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
+    <Layout className='height-full'>
+      <Header className='header-container'>
+      <div className='flex'>
+        <a href="#" target="_blank">
+          <img src={logo} className="logo" alt="Logo" />
         </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <h1 className="star-font">StarWars</h1>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      {/* <HeaderBusca  setSearchTerm={setSearchTerm}/> */}
+      <nav>
+        <ul className='nav-menu'>
+          <li>Página inicial</li>
+          <li>Sobre</li>
+        </ul>
+      </nav>
+      </Header>
+      <Content>             
+              <Loop />
+      </Content>
+    <Footer className='footer-container'>
+              Desafio FullStack ©2023 Created by Ericsson Augusto
+            </Footer>
+    </Layout>
+    
+    
     </>
-  )
-}
+  );
+};
 
-export default App
+export default App;
