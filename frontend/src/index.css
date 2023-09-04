@@ -54,6 +54,7 @@ h1,h2,h3,h4,h5,h6{
   --amarelo: #ffc107;
   --verde: #198754;
   --branco: #fff;
+  --quase-branco: #e4e4e4;
   --cinza: #6c757d;
   --cinza-escuro: #343a40;
   --bg-azul: #002d4b;
@@ -101,4 +102,14 @@ h1,h2,h3,h4,h5,h6{
 .footer-container{
   background-color: var(--bg-azul);
   color: var(--branco);
+}
+.loading{
+  color: var(--bg-azul);
+  display: flex;
+  flex-direction: column;
+  height: 15vh;
+  align-items: center;
+  align-content: space-around;
+  gap: 2rem;
+  justify-content: center;
 }

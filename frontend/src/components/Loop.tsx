@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Card, Col, Row, Input, Button } from 'antd';
 import { StarFilled, StarOutlined } from '@ant-design/icons';
+import ReactLoading from 'react-loading';
 
 // Interface para os personagens
 interface Carregar {
@@ -78,7 +79,16 @@ export function Loop() {
       </Button>
       </div>
       {loading ? (
-        <span>Carregando...</span>
+      <div className='loading flex'>
+        <span>Buscando dados no backend</span>
+
+        <ReactLoading 
+        type='spokes'
+        color='#DDD' 
+        height={'6%'} 
+        width={'7%'} />
+       
+        </div>
       ) : (
         <Row gutter={16}>
           {personagensParaExibir.map((personagem, i) => (
