@@ -57,8 +57,8 @@ export function Loop() {
     setLoading(true);
     setPersonagens([]);
     const url = searchTerm
-      ? `http://localhost:9009?search=${searchTerm}`
-      : 'http://localhost:9009/';
+      ? `https://desafioswapi.onrender.com/ifaugusto/api?search=${searchTerm}`
+      : 'https://desafioswapi.onrender.com/ifaugusto/api/';
     loadPersonagens(url);
   }, [searchTerm]);
   // Filtrar personagens se a opção "mostrarFavoritos" estiver ativada
