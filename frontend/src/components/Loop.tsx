@@ -85,7 +85,7 @@ export function Loop() {
         <ReactLoading 
         type='spokes'
         color='#DDD' 
-        height={'6%'} 
+        height={'7%'} 
         width={'7%'} />
        
         </div>

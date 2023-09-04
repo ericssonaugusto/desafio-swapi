@@ -1,10 +1,22 @@
 # Desafio FullStack API REST SWAPI
-## Solução do desafio [ Consumindo API Star Wars - swapi.dev ]
 
-Pastas necessárias 
+### Consumindo API Star Wars - swapi.dev
+
+
+### Pastas do projeto 
 - frontend
 - backend
+<br/>
+## Trabalhando com o **BACKEND**
+- inicie o projeto 
+`npm init` 
+- instale as dependencias
+`npm install express nodemon cors axios --save`
 
-Dentro da pasta **backend** inicie o projeto 
-`npm init` e instale as ferramentas necessárias
-`npm i express nodemon cors axios --save`
+### Deploy do backend 
+Foi escolhido o serviço render.com para deploy do backend.
+Link da API no backend: https://desafioswapi.onrender.com/ifaugusto/api 
+<br/>
+## Trabalhando com o **FRONTEND**
+
+
