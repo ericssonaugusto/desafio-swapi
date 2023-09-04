@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, Col, Row, Input, Button } from 'antd';
 import { StarFilled, StarOutlined } from '@ant-design/icons';
 import ReactLoading from 'react-loading';
@@ -9,14 +9,18 @@ interface Carregar {
   homeworld: string;
 }
 
+// Cache global para personagens
+const cache: { [key: string]: Carregar[] } = {};
+
 export function Loop() {
   const [loading, setLoading] = useState(true);
   const [personagens, setPersonagens] = useState<Carregar[]>([]);
+  const [personagensFiltrados, setPersonagensFiltrados] = useState<Carregar[]>([]); // Novo estado para personagens filtrados
   const [planetas, setPlanetas] = useState<{ [url: string]: string }>({});
   const [searchTerm, setSearchTerm] = useState('');
   const [favoritos, setFavoritos] = useState<string[]>([]);
-  const [mostrarFavoritos, setMostrarFavoritos] = useState(false); // Estado para alternar entre mostrar todos e mostrar favoritos
-  
+  const [mostrarFavoritos, setMostrarFavoritos] = useState(false);
+
   // Carregar favoritos do localStorage
   useEffect(() => {
     const favs = localStorage.getItem('favoritos');
@@ -24,7 +28,7 @@ export function Loop() {
       setFavoritos(JSON.parse(favs));
     }
   }, []);
-  
+
   // Função para buscar o nome do planeta
   const fetchPlanetName = async (url: string) => {
     const res = await fetch(url);
@@ -32,18 +36,44 @@ export function Loop() {
     setPlanetas(prev => ({ ...prev, [url]: data.name }));
   };
 
-  // Função para carregar personagens
+  // Carrega personagens da API
   const loadPersonagens = async (url: string) => {
+    setLoading(true);
+
+    if (cache['all']) {
+      setPersonagens(cache['all']);
+      setLoading(false);
+      return;
+    }
+
     const res = await fetch(url);
     const data = await res.json();
-    setPersonagens(prev => [...prev, ...data.results]);
-    setLoading(false);
-    
-    // Carregar os nomes dos planetas
-    for (const personagem of data.results) {
-      fetchPlanetName(personagem.homeworld);
+
+    if (Array.isArray(data)) {
+      setPersonagens(data);
+      setLoading(false);
+      cache['all'] = data;
+
+      for (const personagem of data) {
+        fetchPlanetName(personagem.homeworld);
+      }
     }
   };
+
+  // Efeito para filtrar personagens baseado no termo de busca
+  useEffect(() => {
+    if (!searchTerm) {
+      setPersonagensFiltrados(personagens);
+      return;
+    }
+    const filtrados = personagens.filter(p => p.name.toLowerCase().includes(searchTerm.toLowerCase()));
+    setPersonagensFiltrados(filtrados);
+  }, [searchTerm, personagens]);
+
+  useEffect(() => {
+    const url = 'https://desafioswapi.onrender.com/ifaugusto/api/';
+    loadPersonagens(url);
+  }, []);
 
   // Função para adicionar/remover favoritos
   const toggleFavorito = (name: string) => {
@@ -57,40 +87,23 @@ export function Loop() {
     localStorage.setItem('favoritos', JSON.stringify(novosFavoritos));
   };
 
-  useEffect(() => {
-    setLoading(true);
-    setPersonagens([]);
-    const url = searchTerm
-      ? `https://desafioswapi.onrender.com/ifaugusto/api?search=${searchTerm}`
-      : 'https://desafioswapi.onrender.com/ifaugusto/api/';
-    loadPersonagens(url);
-  }, [searchTerm]);
-  
-  // Filtrar personagens se a opção "mostrarFavoritos" estiver ativada
-  const personagensParaExibir = mostrarFavoritos ? personagens.filter(p => favoritos.includes(p.name)) : personagens;
+  const personagensParaExibir = mostrarFavoritos ? personagensFiltrados.filter(p => favoritos.includes(p.name)) : personagensFiltrados;
 
   return (
-    <div style={{ padding: 24, minHeight: 360 }}>
-      <Input.Search
-        placeholder="Buscar personagem"
-        onSearch={value => setSearchTerm(value)}
-        style={{ marginBottom: 16 }}
-      />
-      <div style={{ width: "100%", display: 'flex', padding: '2rem', justifyContent: 'center' }}>
-        <Button style={{minWidth: "200px"}}  onClick={() => setMostrarFavoritos(!mostrarFavoritos)}>
+    <>
+      <div style={{ padding: 24, minHeight: 8, textAlign: 'center' }}>
+        <Input.Search
+          placeholder="Buscar personagem"
+          onSearch={value => setSearchTerm(value)}
+          style={{ marginBottom: 16 }}
+        />
+        <Button onClick={() => setMostrarFavoritos(!mostrarFavoritos)}>
           {mostrarFavoritos ? 'Mostrar Todos' : 'Mostrar Favoritos'}
-          <StarFilled style={{ color: 'gold', fontSize: '1em' }}/>
+          <StarFilled style={{ color: 'gold', fontSize: '1em' }} />
         </Button>
       </div>
       {loading ? (
-        <div className='loading flex'>
-          <span>Buscando dados no backend</span>
-          <ReactLoading 
-          type='spokes'
-          color='#DDD' 
-          height={'7%'} 
-          width={'7%'} />
-        </div>
+        <ReactLoading type="spokes" color="#DDD" height={'7%'} width={'7%'} />
       ) : (
         <Row gutter={16}>
           {personagensParaExibir.map((personagem, i) => (
@@ -99,9 +112,8 @@ export function Loop() {
                 <br />
                 Planeta: {planetas[personagem.homeworld] || 'Carregando...'}
                 <br />
-                <span 
-                  onClick={() => toggleFavorito(personagem.name)} 
-                  title={favoritos.includes(personagem.name) ? 'Remover dos Favoritos' : 'Adicionar aos Favoritos'} 
+                <span
+                  onClick={() => toggleFavorito(personagem.name)}
                   style={{ cursor: 'pointer', fontSize: '2em', padding: '8px' }}
                 >
                   {favoritos.includes(personagem.name) ? <StarFilled style={{ color: 'gold' }} /> : <StarOutlined />}
@@ -111,6 +123,6 @@ export function Loop() {
           ))}
         </Row>
       )}
-    </div>
+    </>
   );
 }
