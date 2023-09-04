@@ -5,7 +5,7 @@ const axios = require('axios')
 
 app.use(cors())
 
-app.get('/api', async(requisicao, resposta) => {
+app.get('/ifaugusto/api', async(requisicao, resposta) => {
 
     try {
     //response é o padrão más {data} já é produto direto
