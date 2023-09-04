@@ -1,4 +1,4 @@
-# desafio-swapi
+# Desafio FullStack API REST SWAPI
 ## Solução do desafio [ Consumindo API Star Wars - swapi.dev ]
 
 Pastas necessárias 
