@@ -3,7 +3,7 @@ import './index.css';
 import logo from '/logo.svg'
 import React from 'react';
 import { Layout} from 'antd';
-import { Loop } from './components/Loop';
+import AppRoutes from './Routers'
 
 
 const { Content, Footer, Header } = Layout;
@@ -24,13 +24,14 @@ const App: React.FC = () => {
       {/* <HeaderBusca  setSearchTerm={setSearchTerm}/> */}
       <nav>
         <ul className='nav-menu'>
-          <li>Página inicial</li>
-          <li>Sobre</li>
+          <a href="/"><li>Página inicial</li></a>
+          <a href="/user"><li>User</li></a>
+          
         </ul>
       </nav>
       </Header>
-      <Content>             
-              <Loop />
+      <Content>
+            <AppRoutes />     
       </Content>
     <Footer className='footer-container'>
               Desafio FullStack ©2023 Created by Ericsson Augusto

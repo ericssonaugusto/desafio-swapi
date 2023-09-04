@@ -12,7 +12,7 @@ interface Carregar {
 // Cache global para personagens
 const cache: { [key: string]: Carregar[] } = {};
 
-export function Loop() {
+export function Home() {
   const [loading, setLoading] = useState(true);
   const [personagens, setPersonagens] = useState<Carregar[]>([]);
   const [personagensFiltrados, setPersonagensFiltrados] = useState<Carregar[]>([]); // Novo estado para personagens filtrados

@@ -8,7 +8,7 @@ interface DadosFormulario {
   respostaSecreta: string;
 }
 
-const Cadastro: React.FC = () => {
+const User: React.FC = () => {
   const [dadosFormulario, setDadosFormulario] = useState<DadosFormulario>({
     email: '',
     senha: '',
@@ -161,4 +161,4 @@ const Cadastro: React.FC = () => {
   );
 };
 
-export default Cadastro;
+export default User;
