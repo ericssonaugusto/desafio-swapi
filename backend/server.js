@@ -1,19 +1,29 @@
-const cors = require('cors') /* permite frontend e banckend */
-const express = require('express')
-const app = express()
-const axios = require('axios')
+const cors = require('cors');
+const express = require('express');
+const app = express();
+const axios = require('axios');
+const apicache = require('apicache');
+let cache = apicache.middleware;
 
-app.use(cors())
+const port = 9009;
 
-app.get('/ifaugusto/api', async(requisicao, resposta) => {
+app.use(cache('7 day'));
+app.use(cors());
 
+const swapi = 'https://swapi.dev/api/people/';
+
+app.get('/ifaugusto/api', async (req, res) => {
     try {
-    //response é o padrão más {data} já é produto direto
-    const { data } = await axios ('https://swapi.dev/api/people/')
-    return resposta.json(data)
-        
+        console.log('Tentando acessar a API Star Wars');
+        const { data } = await axios(swapi);
+        console.log('Dados recebidos com sucesso');
+        return res.json(data);
     } catch (error) {
-        console.error(error)
+        console.error('Erro ao acessar a API Star Wars:', error);
+        return res.status(500).json({ mensagem: 'Ocorreu um erro no servidor' });
     }
-})
-app.listen('9009')/* define a porta 9009 */ 
+});
+
+app.listen(port, () => {
+    console.log(`Aplicação rodando na porta ${port}`);
+});
