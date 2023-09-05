@@ -1,5 +1,5 @@
 // Importação de bibliotecas e componentes
-import './index.css';
+import './global.css';
 import logo from '/logo.svg'
 import React from 'react';
 import { Layout} from 'antd';

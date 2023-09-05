@@ -1,6 +1,6 @@
 
-import User from "./components/User"
-import {Home} from "./components/Home"
+import User from "./pages/User"
+import {Home} from "./pages/Home"
 import { BrowserRouter as Router, Routes, Route} from "react-router-dom"
 
 
