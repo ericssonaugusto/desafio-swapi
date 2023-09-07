@@ -1,55 +1,57 @@
 // Importação de bibliotecas e componentes
-import './global.css';
-import logo from '/logo.png'
-import { Button, Modal, Layout} from 'antd';
-import { Home } from './Home';
-import User from './components/User';
-import React, {useState} from 'react';
+import './global.css'
+import { Layout, FloatButton} from 'antd'
+import { ContentHome, Personagem } from './ContentHome'
+import React, {useState} from 'react'
+import { AplicationContext } from './contexts/AplicationContext'
+import { HeaderComponent } from './components/Header'
 
 
-
-const { Content, Footer, Header } = Layout;
+const { Content, Footer } = Layout;
 
 // Componente App
 const App: React.FC = () => {
-  /* const [searchTerm, setSearchTerm] = 'useState'<string>(''); */
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const showModal = () => {
-    setIsModalOpen(true);
-  };
-  const handleCancel = () => {
-    setIsModalOpen(false);
-  };
-  return (
-    <>
-    <Layout className='height-full'>
-      <Header className='header-container'>
-      <div className='flex'>
-      <a className='area-logo' href="/" target="_blank">
-      <img src={logo} className="logo" alt="Logo" />    
-      <div className='flex'><h1 className="titulo">API </h1> <span>swapi.dev</span> </div>   
-      
-      </a>
-      </div>
-      <Button type="primary" onClick={showModal}>
-        Login - Cadastro
-      </Button>
-      <Modal title="Usuário" footer={null} open={isModalOpen} onCancel={handleCancel}>
-        <User/>
-      </Modal>
 
-      </Header>
-      <Content>
-      <Home/>  
-      </Content>
-    <Footer className='footer-container'>
-              Desafio FullStack ©2023 Created by Ericsson Augusto
-    </Footer>
-    </Layout>
+// States do Home
+  const [personagens, setPersonagens] = useState<Personagem[]>([]) //armazena a lista de personagens
+
+  const [favoritos, setFavoritos] = useState<string[]>([])
+  const [mostrarFavoritos, setMostrarFavoritos] = useState(false)
+  const [busca, setBusca] = useState('')
+  const [estaLogado, setEstaLogado] = useState(false);
+
+  return (
     
+     <AplicationContext.Provider 
+          value={{ personagens, 
+                    setPersonagens, 
+                    favoritos, 
+                    setFavoritos, 
+                    mostrarFavoritos, 
+                    setMostrarFavoritos,
+                    busca, 
+                    setBusca,
+                    estaLogado, 
+                    setEstaLogado
+                  }}>
+          <Layout className='height-full'>
+            
+            <HeaderComponent/>
+            <Content>
+               <ContentHome/>  
+            </Content>
+          
+          <Footer className='footer-container'>
+                    Desafio FullStack ©2023 Created by Ericsson Augusto
+          </Footer>
+
+          </Layout>
+    <FloatButton.Group shape="circle">
+      <FloatButton.BackTop visibilityHeight={50} />
+    </FloatButton.Group>
     
-    </>
+    </AplicationContext.Provider>
   );
 };
 
-export default App;
+export default App

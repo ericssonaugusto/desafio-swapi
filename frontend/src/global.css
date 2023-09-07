@@ -3,6 +3,7 @@
    License: none (public domain)
 */
 
+
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -114,4 +115,26 @@ h1,h2,h3,h4,h5,h6{
   display: flex;
   justify-content: center;
 
+}
+.mostrar-favoritos {
+    color:var(--branco);
+    background-color: transparent;
+    border-color: transparent;
+    box-shadow: 0 2px 0 rgba(0, 0, 0, 0.02);
+}
+.mostrar-favoritos::before {
+    color: var(--quase-branco);
+}
+.esc-busca{
+    display: block;
+    color: #bbb;
+    position: absolute;
+    z-index: 9;
+    top: 0;
+    right: 25px;
+    opacity: 0; /* Inicia invisível */
+  transition: opacity 0.8s ease;
+}
+.esc-busca.mostrar {
+  opacity: 1; /* Torna visível */
 }

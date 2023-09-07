@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Button, Form, Input, message, Modal } from 'antd';
+import { AplicationContext } from '../contexts/AplicationContext'
 
 interface DadosFormulario {
   email: string;
@@ -16,7 +17,7 @@ const User: React.FC = () => {
     respostaSecreta: ''
   });
   const [estaCadastrando, setEstaCadastrando] = useState(false);
-  const [estaLogado, setEstaLogado] = useState(false);
+  const {estaLogado, setEstaLogado} = useContext(AplicationContext);
   const [modalVisivel, setModalVisivel] = useState(false);
   const [dadosCadastrados, setDadosCadastrados] = useState<DadosFormulario | null>(null);
 
