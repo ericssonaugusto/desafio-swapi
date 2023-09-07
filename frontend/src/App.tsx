@@ -5,6 +5,7 @@ import { ContentHome, Personagem } from "./ContentHome";
 import React, { useState } from "react";
 import { AplicationContext } from "./contexts/AplicationContext";
 import { HeaderComponent } from "./components/Header";
+import { User } from "firebase/auth";
 
 const { Content, Footer } = Layout;
 
@@ -17,6 +18,9 @@ const App: React.FC = () => {
   const [mostrarFavoritos, setMostrarFavoritos] = useState(false);
   const [busca, setBusca] = useState("");
   const [estaLogado, setEstaLogado] = useState(false);
+  const [user, setUser] = useState<User>({} as User);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   
 
   return (
@@ -32,6 +36,12 @@ const App: React.FC = () => {
         setBusca,
         estaLogado,
         setEstaLogado,
+        user,
+        setUser,
+        email,
+        setEmail,
+        password,
+        setPassword,
       }}
     >
       <Layout className="height-full">

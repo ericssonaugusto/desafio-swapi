@@ -20,7 +20,6 @@ export function ContentHome() {
     busca,
   } = useContext(AplicationContext);
 
-  console.count("Renderizou");
 
   useEffect(() => {
     fetch("https://desafioswapi.onrender.com/ifaugusto/api/")
