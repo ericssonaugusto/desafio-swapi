@@ -1,5 +1,5 @@
 import logo from '../../public/logo.png'
-import { Button, Modal, Input, Layout } from 'antd'
+import { Button, Modal, Input, Layout, Badge } from 'antd'
 import User from '../components/User'
 import { StarFilled, SearchOutlined, UserOutlined  } from '@ant-design/icons'
 import React, {useState, useContext} from 'react'
@@ -69,10 +69,14 @@ export function HeaderComponent(){
 
 
                <div style={{display: 'flex', alignItems: 'center', gap: '3rem'}}>
-              <Button size="large" type="link" className='mostrar-favoritos' onClick={() => setMostrarFavoritos(!mostrarFavoritos)}>
+              <Button  size="large" type="link" className='mostrar-favoritos' onClick={() => setMostrarFavoritos(!mostrarFavoritos)}>
                 {mostrarFavoritos ? 'Mostrar Todos' : 'Mostrar Favoritos'}
-                <StarFilled style={{ color: 'gold', fontSize: '1em', backgroundColor: 'transparent' }} />
-               
+                <Badge size="small" count={favoritos.length}>
+                <StarFilled  style={{ color: 'gold', fontSize: '2em', backgroundColor: 'transparent' }} />
+                </Badge>
+                <h2>
+                  
+                  </h2> 
               </Button>
 
               <Button ghost={true} size="large" type="primary" style={{color: "#FFF"}}  onClick={showModal}>
