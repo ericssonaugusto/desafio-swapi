@@ -1,22 +1,67 @@
-# Desafio FullStack API REST SWAPI
+# Desafio Star Wars API
 
-### Consumindo API Star Wars - swapi.dev
+## Descrição do Projeto
 
+Este projeto é uma aplicação web que permite aos usuários pesquisar personagens do universo Star Wars e marcá-los como favoritos. A aplicação foi construída usando React para o frontend e Express para o backend.
 
-### Pastas do projeto 
-- frontend
-- backend
+## Funcionalidades
+
+- Pesquisa de personagens pelo nome ou parte do nome
+- Marcar e desmarcar personagens como favoritos
+- Listar personagens marcados como favoritos
+
+## Tecnologias Utilizadas
+
+### Frontend
+- React
+- Ant Design
+- React Router Dom
+
+### Backend
+- Node.js
+- Express
+- Axios
+- Apicache
+- Nodemon
+
+## Configuração para Instalação
+
+1. Clone o repositório para sua máquina.
+2. Instale as dependências usando `npm install` ou `yarn install`.
+
+## Utilização
+
+### Endereços do Projeto
+
+- API Backend: [https://desafioswapi.onrender.com/ifaugusto/api/](https://desafioswapi.onrender.com/ifaugusto/api/)
+- Frontend: [www.ericssonaugusto.com.br](https://www.ericssonaugusto.com.br)
+
+### Como Usar
+
+1. Abra seu navegador e acesse o endereço do frontend.
+2. Use a barra de pesquisa para encontrar personagens pelo nome.
+3. Clique no ícone de estrela para marcar ou desmarcar personagens como favoritos.
+4. Visualize seus personagens favoritos na seção "Favoritos".
+
+### Backup e Cache
+
+Como uma medida para melhorar a disponibilidade e a confiabilidade, o projeto possui uma rota de backup(swapi.py4e.com) que é acionada caso a API principal da Star Wars (SWAPI.dev) fique indisponível. Se em 10 segundos não houver sucesso na conexão e segue pro backup, durante o desenvovimento do projeto notei indisponibilidade na principal diversas vezes. 
 <br/>
-## Trabalhando com o **BACKEND**
-- inicie o projeto 
-`npm init` 
-- instale as dependencias
-`npm install express nodemon cors axios --save`
+Além disso, é utilizado `apicache` para melhorar o desempenho da aplicação, como essa Api está estática, configurei o cache em 1 dia, os dados ficam salvos in momory no servidor de backend.
 
-### Deploy do backend 
-Foi escolhido o serviço render.com para deploy do backend.
-Link da API no backend: https://desafioswapi.onrender.com/ifaugusto/api 
-<br/>
-## Trabalhando com o **FRONTEND**
-
-
+```javascript
+app.get('/ifaugusto/api', async (req, res) => {
+ try { 
+    const todasAsPaginas = await buscarTodasAsPaginas('https://swapi.dev/api/people/', 10000); 
+    res.json(todasAsPaginas); 
+  } catch (error) {
+    console.error('Erro ao acessar a primeira API Star Wars:', error); 
+    try {
+      const todasAsPaginasBackup = await buscarTodasAsPaginas('https://swapi.py4e.com/api/people/', 10000);
+      res.json(todasAsPaginasBackup); 
+    } catch (errorBackup) { 
+      console.error('Erro ao acessar a segunda API Star Wars:', errorBackup);
+      res.status(500).json({ mensagem: 'Ocorreu um erro no servidor' });
+    }
+  }
+});
