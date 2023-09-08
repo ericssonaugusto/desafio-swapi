@@ -34,7 +34,7 @@ Este projeto é uma aplicação web que permite aos usuários pesquisar personag
 ### Endereços do Projeto
 
 - API Backend: [https://desafioswapi.onrender.com/ifaugusto/api/](https://desafioswapi.onrender.com/ifaugusto/api/)
-- Frontend: [www.ericssonaugusto.com.br](https://www.ericssonaugusto.com.br)
+- Frontend: [https://desafio-swapi-ten.vercel.app/](https://desafio-swapi-ten.vercel.app/)  
 
 ### Como Usar
 
