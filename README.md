@@ -14,7 +14,9 @@ Este projeto é uma aplicação web que permite aos usuários pesquisar personag
 
 ### Frontend
 - React
+- Vite
 - Ant Design
+- Firebase
 - React Router Dom
 
 ### Backend
@@ -27,7 +29,8 @@ Este projeto é uma aplicação web que permite aos usuários pesquisar personag
 ## Configuração para Instalação
 
 1. Clone o repositório para sua máquina.
-2. Instale as dependências usando `npm install` ou `yarn install`.
+2. Em cada aplicação instale as dependências usando `npm install` ou `yarn install`.
+3. Em localhost no frontend use `npm run dev` e backend `npm start`
 
 ## Utilização
 
