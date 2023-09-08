@@ -6,7 +6,6 @@ import {
   onAuthStateChanged,
 } from "firebase/auth";
 import { Button, Badge } from "antd";
-import { UserOutlined } from "@ant-design/icons";
 import { AplicationContext } from "../contexts/AplicationContext";
 import { auth } from "../services/firebase";
 
@@ -14,20 +13,17 @@ export function UserAuth() {
   const { user, setUser } = useContext(AplicationContext);
 
   useEffect(() => {
-    const verificadorLogin = onAuthStateChanged(
-      auth,
-      (usuarioAutenticado) => {
-        setUser(usuarioAutenticado);
-      }
-    );
+    const verificadorLogin = onAuthStateChanged(auth, (usuarioAutenticado) => {
+      setUser(usuarioAutenticado);
+    });
 
     return () => {
       verificadorLogin();
     };
   }, [setUser]);
-  
-  const propsBadge = user && user.displayName ? { text: "Sair", color: "red" } : {};
 
+  const propsBadge =
+    user && user.displayName ? { text: "Sair", color: "red" } : {};
 
   function handleLognInLogOut() {
     if (!user) {
@@ -52,7 +48,7 @@ export function UserAuth() {
   }
 
   return (
-    <Badge.Ribbon {...propsBadge} >
+    <Badge.Ribbon {...propsBadge}>
       <Button
         ghost={true}
         size="large"
@@ -61,7 +57,6 @@ export function UserAuth() {
         onClick={handleLognInLogOut}
       >
         {user && user.displayName ? user.displayName : "Login - Cadastro"}
-        
       </Button>
     </Badge.Ribbon>
   );

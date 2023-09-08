@@ -21,7 +21,6 @@ const App: React.FC = () => {
   const [user, setUser] = useState<User>({} as User);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  
 
   return (
     <AplicationContext.Provider

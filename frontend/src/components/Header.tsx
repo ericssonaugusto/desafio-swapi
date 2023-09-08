@@ -1,23 +1,14 @@
 import logo from "../../public/logo.png";
 import { Button, Input, Layout, Badge } from "antd";
-import { StarFilled, SearchOutlined} from "@ant-design/icons";
-import React, {  useContext } from "react";
+import { StarFilled, SearchOutlined } from "@ant-design/icons";
+import React, { useContext } from "react";
 import { AplicationContext } from "../contexts/AplicationContext";
 import { UserAuth } from "./UserAuth";
-
 const { Header } = Layout;
 
 export function HeaderComponent() {
-  const {
-    favoritos,
-    mostrarFavoritos,
-    setMostrarFavoritos,
-    busca,
-    setBusca,
-  } = useContext(AplicationContext);
-
-  
-
+  const { favoritos, mostrarFavoritos, setMostrarFavoritos, busca, setBusca } =
+    useContext(AplicationContext);
   return (
     <Header className="header-container">
       <div className="flex">
@@ -61,7 +52,6 @@ export function HeaderComponent() {
           onClick={() => setMostrarFavoritos(!mostrarFavoritos)}
         >
           {mostrarFavoritos ? "Mostrar Todos" : "Mostrar Favoritos"}
-          
           <Badge size="small" count={favoritos.length}>
             <StarFilled
               style={{
@@ -72,9 +62,7 @@ export function HeaderComponent() {
             />
           </Badge>
         </Button>
-
         <UserAuth />
-
       </div>
     </Header>
   );

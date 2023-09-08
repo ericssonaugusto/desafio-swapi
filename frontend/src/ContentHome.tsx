@@ -1,5 +1,5 @@
 import { useEffect, useContext } from "react";
-import { Card, Col, Row, Tooltip } from "antd";
+import { Card, Col, Row } from "antd";
 import { StarFilled, StarOutlined, SearchOutlined } from "@ant-design/icons";
 import { AplicationContext } from "./contexts/AplicationContext";
 
@@ -19,7 +19,6 @@ export function ContentHome() {
     setMostrarFavoritos,
     busca,
   } = useContext(AplicationContext);
-
 
   useEffect(() => {
     fetch("https://desafioswapi.onrender.com/ifaugusto/api/")
@@ -98,30 +97,27 @@ export function ContentHome() {
         ) : (
           ""
         )}
-
         {personagensFiltrados.map((personagem: Personagem, i: number) => (
           <Col span={6} style={{ width: 300, padding: "24px" }} key={i}>
-            <Tooltip title="prompt text">
-              <Card
-                style={{
-                  boxShadow: "rgba(99, 99, 99, 0.2) 0px 1px 20px 0px",
-                  textAlign: "center",
-                  fontSize: 12,
-                }}
-                title={personagem.name}
+            <Card
+              style={{
+                boxShadow: "rgba(99, 99, 99, 0.2) 0px 1px 20px 0px",
+                textAlign: "center",
+                fontSize: 12,
+              }}
+              title={personagem.name}
+            >
+              <span
+                onClick={() => alternarFavoritos(personagem.name)}
+                style={{ cursor: "pointer", fontSize: "2em", padding: "8px" }}
               >
-                <span
-                  onClick={() => alternarFavoritos(personagem.name)}
-                  style={{ cursor: "pointer", fontSize: "2em", padding: "8px" }}
-                >
-                  {favoritos.includes(personagem.name) ? (
-                    <StarFilled style={{ color: "gold" }} />
-                  ) : (
-                    <StarOutlined />
-                  )}
-                </span>
-              </Card>
-            </Tooltip>
+                {favoritos.includes(personagem.name) ? (
+                  <StarFilled style={{ color: "gold" }} />
+                ) : (
+                  <StarOutlined />
+                )}
+              </span>
+            </Card>
           </Col>
         ))}
       </Row>
