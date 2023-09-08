@@ -1,6 +1,6 @@
 import logo from "../../public/logo.png";
 import { Button, Input, Layout, Badge } from "antd";
-import { StarFilled, SearchOutlined, UserOutlined } from "@ant-design/icons";
+import { StarFilled, SearchOutlined} from "@ant-design/icons";
 import React, {  useContext } from "react";
 import { AplicationContext } from "../contexts/AplicationContext";
 import { UserAuth } from "./UserAuth";
@@ -71,7 +71,7 @@ export function HeaderComponent() {
             />
           </Badge>
         </Button>
-        
+
         <UserAuth />
 
       </div>
