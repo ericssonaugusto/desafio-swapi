@@ -68,3 +68,5 @@ app.get('/ifaugusto/api', async (req, res) => {
     }
   }
 });
+
+### Obrigado por visitarem esse repositório
