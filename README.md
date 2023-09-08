@@ -67,6 +67,7 @@ app.get('/ifaugusto/api', async (req, res) => {
       res.status(500).json({ mensagem: 'Ocorreu um erro no servidor' });
     }
   }
-});
+}); ````
 
-### Obrigado por visitarem esse repositório
+
+
