@@ -17,6 +17,7 @@ export function ContentHome() {
     mostrarFavoritos,
     setMostrarFavoritos,
     busca,
+    isMobile
   } = useContext(AplicationContext);
 
   useEffect(() => {
@@ -86,14 +87,20 @@ export function ContentHome() {
             ) : (
               <p>Você não possui favoritos</p>
             )}
-
-            <span>Pressione [ESC] para retornar</span>
+            {!isMobile ? <span>Pressione [ESC] para retornar</span> : "Clique no logo STAR WARS pra recarregar"}
           </div>
         ) : (
           ""
         )}
         {personagensFiltrados.map((personagem: Personagem, i: number) => (
-          <Col xs={24} sm={12} md={8} lg={6} style={{ width: 300, padding: "24px" }} key={i}>
+          <Col
+            xs={24}
+            sm={12}
+            md={8}
+            lg={6}
+            style={{ width: 300, padding: "24px" }}
+            key={i}
+          >
             <Card
               style={{
                 boxShadow: "rgba(99, 99, 99, 0.2) 0px 1px 20px 0px",

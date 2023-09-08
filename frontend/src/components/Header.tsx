@@ -30,14 +30,14 @@ export function HeaderComponent() {
     };
   }, []);
 
-  const clearSearchMobile = (e:any) => {
+  const limparBuscaMobile = (e:any) => {
     if (isMobile && !e.target.closest(".ant-input")) {
       setBusca("");
     }
   };
 
   return (
-    <Header className="header-container" onClick={clearSearchMobile}>
+    <Header className="header-container" onClick={limparBuscaMobile}>
       <div className="flex">
         <a className="area-logo" href="/" target="_blank">
           <img src={logo} className="logo" alt="Logo" />
@@ -65,7 +65,7 @@ export function HeaderComponent() {
           style={{ width: 300 }}
         />
         <small className={`esc-busca ${busca ? "mostrar" : ""}`}>
-          [ ESC ] para limpar
+         {!isMobile ? "[ ESC ] para limpar" : "" } 
         </small>
       </div>
       <div className="area-favorito-login">
