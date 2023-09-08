@@ -66,7 +66,7 @@ export function ContentHome() {
   }, [favoritos]);
   return (
     <div>
-    <Row
+      <Row
         gutter={16}
         style={{
           width: "90%",
@@ -93,7 +93,7 @@ export function ContentHome() {
           ""
         )}
         {personagensFiltrados.map((personagem: Personagem, i: number) => (
-          <Col span={6} style={{ width: 300, padding: "24px" }} key={i}>
+          <Col xs={24} sm={12} md={8} lg={6} style={{ width: 300, padding: "24px" }} key={i}>
             <Card
               style={{
                 boxShadow: "rgba(99, 99, 99, 0.2) 0px 1px 20px 0px",

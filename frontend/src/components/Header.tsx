@@ -44,7 +44,7 @@ export function HeaderComponent() {
         </small>
       </div>
 
-      <div style={{ display: "flex", alignItems: "center", gap: "3rem" }}>
+      <div className="area-favorito-login">
         <Button
           size="large"
           type="link"

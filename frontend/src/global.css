@@ -198,6 +198,11 @@ h6 {
   display: flex;
   justify-content: center;
 }
+.area-favorito-login{
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+}
 
 .mostrar-favoritos {
   display: flex;
@@ -236,4 +241,15 @@ h6 {
 }
 .ant-ribbon {
   color: transparent;
+}
+@media screen and (max-width: 900px) {
+  .header-container, .area-favorito-login, .area-logo {
+  flex-direction: column;
+}
+  .area-favorito-login{
+    gap: 1rem;
+  }
+  .area-logo{
+    gap: .1rem;
+  }
 }
