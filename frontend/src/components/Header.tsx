@@ -1,7 +1,7 @@
 import logo from "../../public/logo.png";
-import { Button, Modal, Input, Layout, Badge } from "antd";
+import { Button, Input, Layout, Badge } from "antd";
 import { StarFilled, SearchOutlined, UserOutlined } from "@ant-design/icons";
-import React, { useState, useContext } from "react";
+import React, {  useContext } from "react";
 import { AplicationContext } from "../contexts/AplicationContext";
 import { UserAuth } from "./UserAuth";
 
@@ -16,13 +16,7 @@ export function HeaderComponent() {
     setBusca,
   } = useContext(AplicationContext);
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const showModal = () => {
-    setIsModalOpen(true);
-  };
-  const handleCancel = () => {
-    setIsModalOpen(false);
-  };
+  
 
   return (
     <Header className="header-container">
@@ -77,26 +71,9 @@ export function HeaderComponent() {
             />
           </Badge>
         </Button>
+        
+        <UserAuth />
 
-        <Button
-          ghost={true}
-          size="large"
-          type="primary"
-          style={{ color: "#FFF" }}
-          onClick={showModal}
-        >
-          Login - Cadastro
-          <UserOutlined />
-        </Button>
-
-        <Modal
-          title="Usuário"
-          footer={null}
-          open={isModalOpen}
-          onCancel={handleCancel}
-        >
-          <UserAuth />
-        </Modal>
       </div>
     </Header>
   );
