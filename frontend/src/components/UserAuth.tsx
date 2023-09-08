@@ -1,38 +1,68 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import {
   GoogleAuthProvider,
   signInWithPopup,
+  signOut,
+  onAuthStateChanged,
 } from "firebase/auth";
-import { Button } from "antd";
-import {  UserOutlined } from "@ant-design/icons";
+import { Button, Badge } from "antd";
+import { UserOutlined } from "@ant-design/icons";
 import { AplicationContext } from "../contexts/AplicationContext";
-import {auth} from "../services/firebase";  
-
-
+import { auth } from "../services/firebase";
 
 export function UserAuth() {
-  const { setUser } = useContext(AplicationContext);
+  const { user, setUser } = useContext(AplicationContext);
 
-  function handleGoogleSignIn(){
-  const provider = new GoogleAuthProvider();
-  signInWithPopup(auth, provider)
-      .then((result) => {
-        setUser(result.user);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }
+  useEffect(() => {
+    const verificadorLogin = onAuthStateChanged(
+      auth,
+      (usuarioAutenticado) => {
+        setUser(usuarioAutenticado);
+      }
+    );
+
+    return () => {
+      verificadorLogin();
+    };
+  }, [setUser]);
   
+  const propsBadge = user && user.displayName ? { text: "Sair", color: "red" } : {};
+
+
+  function handleLognInLogOut() {
+    if (!user) {
+      const provedorGoogle = new GoogleAuthProvider();
+
+      signInWithPopup(auth, provedorGoogle)
+        .then((resultado) => {
+          setUser(resultado.user);
+        })
+        .catch((erro) => {
+          console.error(erro);
+        });
+    } else {
+      signOut(auth)
+        .then(() => {
+          setUser(null);
+        })
+        .catch((erro) => {
+          console.error(erro);
+        });
+    }
+  }
+
   return (
-     <Button
-          ghost={true}
-          size="large"
-          type="primary"
-          style={{ color: "#FFF" }}
-          onClick={handleGoogleSignIn}> 
-          Login - Cadastro
-          <UserOutlined />
-        </Button>
+    <Badge.Ribbon {...propsBadge} >
+      <Button
+        ghost={true}
+        size="large"
+        type="primary"
+        style={{ color: "#FFF" }}
+        onClick={handleLognInLogOut}
+      >
+        {user && user.displayName ? user.displayName : "Login - Cadastro"}
+        
+      </Button>
+    </Badge.Ribbon>
   );
 }

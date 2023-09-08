@@ -46,7 +46,7 @@ export function HeaderComponent() {
               (event.target as HTMLInputElement).value = "";
             }
           }}
-          style={{ width: 500 }}
+          style={{ width: 300 }}
         />
         <small className={`esc-busca ${busca ? "mostrar" : ""}`}>
           [ ESC ] para limpar
@@ -61,6 +61,7 @@ export function HeaderComponent() {
           onClick={() => setMostrarFavoritos(!mostrarFavoritos)}
         >
           {mostrarFavoritos ? "Mostrar Todos" : "Mostrar Favoritos"}
+          
           <Badge size="small" count={favoritos.length}>
             <StarFilled
               style={{

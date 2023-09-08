@@ -172,7 +172,7 @@ h6 {
 .area-logo {
   display: flex;
   align-items: center;
-  gap: 2rem;
+  gap: 1rem;
 }
 .header-container {
   display: flex;
@@ -233,4 +233,7 @@ h6 {
   flex-direction: column;
   gap: 3rem;
   font-size: 1.1rem;
+}
+.ant-ribbon{
+  color: transparent;
 }
