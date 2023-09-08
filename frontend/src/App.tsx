@@ -21,6 +21,7 @@ const App: React.FC = () => {
   const [user, setUser] = useState<User>({} as User);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
   return (
     <AplicationContext.Provider
@@ -41,6 +42,8 @@ const App: React.FC = () => {
         setEmail,
         password,
         setPassword,
+        isMobile,
+        setIsMobile,
       }}
     >
       <Layout className="height-full">

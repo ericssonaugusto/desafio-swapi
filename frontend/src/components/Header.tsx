@@ -1,21 +1,48 @@
 import logo from "../../public/logo.png";
 import { Button, Input, Layout, Badge } from "antd";
 import { StarFilled, SearchOutlined } from "@ant-design/icons";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { AplicationContext } from "../contexts/AplicationContext";
 import { UserAuth } from "./UserAuth";
+
 const { Header } = Layout;
 
 export function HeaderComponent() {
-  const { favoritos, mostrarFavoritos, setMostrarFavoritos, busca, setBusca } =
-    useContext(AplicationContext);
+  const {
+    favoritos,
+    mostrarFavoritos,
+    setMostrarFavoritos,
+    busca,
+    setBusca,
+    isMobile,
+    setIsMobile,
+  } = useContext(AplicationContext);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  const clearSearchMobile = (e:any) => {
+    if (isMobile && !e.target.closest(".ant-input")) {
+      setBusca("");
+    }
+  };
+
   return (
-    <Header className="header-container">
+    <Header className="header-container" onClick={clearSearchMobile}>
       <div className="flex">
         <a className="area-logo" href="/" target="_blank">
           <img src={logo} className="logo" alt="Logo" />
-          <div style={{ fontSize: "1.4  rem" }} className="flex">
-            <h1 className="titulo">API </h1> <span>swapi.dev</span>{" "}
+          <div style={{ fontSize: "1.4rem" }} className="flex">
+            <h1 className="titulo">API</h1> <span>swapi.dev</span>
           </div>
         </a>
       </div>
@@ -24,9 +51,7 @@ export function HeaderComponent() {
           size="large"
           placeholder="Buscar personagem"
           prefix={<SearchOutlined />}
-          onChange={(event) => {
-            setBusca(event.target.value);
-          }}
+          onChange={(event) => setBusca(event.target.value)}
           onKeyDown={(event) => {
             if (event.key === "Escape") {
               setBusca("");
@@ -43,7 +68,6 @@ export function HeaderComponent() {
           [ ESC ] para limpar
         </small>
       </div>
-
       <div className="area-favorito-login">
         <Button
           size="large"
