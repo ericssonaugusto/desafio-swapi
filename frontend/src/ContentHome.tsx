@@ -3,7 +3,6 @@ import { Card, Col, Row } from "antd";
 import { StarFilled, StarOutlined, SearchOutlined } from "@ant-design/icons";
 import { AplicationContext } from "./contexts/AplicationContext";
 
-// Interface para os personagens
 export interface Personagem {
   name: string;
   homeworld: string;
@@ -28,7 +27,6 @@ export function ContentHome() {
       });
   }, []);
 
-  // Carregar favoritos, se existir no localStorage
   useEffect(() => {
     const favoritosSalvos = localStorage.getItem("favoritos");
     if (favoritosSalvos) {
@@ -48,7 +46,7 @@ export function ContentHome() {
     if (mostrarFavoritos) {
       return favoritos.includes(personagem.name);
     }
-    // parte buscar
+
     if (personagem.name.toLowerCase().includes(busca.toLowerCase())) {
       return personagem;
     }
@@ -68,14 +66,11 @@ export function ContentHome() {
   }, [favoritos]);
   return (
     <div>
-      <div style={{ padding: 60, textAlign: "center" }}></div>
-
-      <Row
+    <Row
         gutter={16}
         style={{
-          marginBottom: 16,
           width: "90%",
-          margin: "0 auto",
+          margin: "4rem auto",
           paddingBottom: 100,
         }}
       >
